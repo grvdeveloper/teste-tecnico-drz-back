@@ -5,10 +5,10 @@ export class ElevatorAIService {
   private ai: GoogleGenAI;
 
   constructor() {
-    // if (!process.env.GEMINI_API_KEY) {
-    //   throw new Error('GEMINI_API_KEY is not defined');
-    // }
-    this.ai = new GoogleGenAI({ apiKey: "AIzaSyAwx8ZLFl_WRn5_QgdqvOL3X7AbPWRe8uc" });
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error('GEMINI_API_KEY is not defined');
+    }
+    this.ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   }
 
   public async askQuestion(question: string, contextText: string): Promise<string> {
