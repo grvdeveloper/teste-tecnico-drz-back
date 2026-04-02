@@ -1,0 +1,5 @@
+{
+  "name": "Elevator AI API",
+  "description": "API backend utilizando Express e TypeScript para responder perguntas sobre normas de elevadores usando IA.",
+  "requestFramePermissions": []
+}
