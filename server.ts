@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { app } from './app';
 
 // NOTA: O ambiente do AI Studio restringe a porta externa para 3000.

@@ -27,8 +27,13 @@ export class ElevatorController {
     try {
       const { question } = req.body as AskDTO;
       const contextText = textStorageService.getText();
+      const history = textStorageService.getHistory();
 
-      const answer = await this.aiService.askQuestion(question, contextText);
+      const answer = await this.aiService.askQuestion(question, contextText, history);
+
+      // Adicionar pergunta e resposta ao histórico para manter a conversa
+      textStorageService.addMessageToHistory('user', question);
+      textStorageService.addMessageToHistory('model', answer);
 
       res.status(200).json({
         answer,

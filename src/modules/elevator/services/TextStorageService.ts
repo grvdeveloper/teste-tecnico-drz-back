@@ -1,20 +1,35 @@
+export interface Message {
+  role: 'user' | 'model';
+  parts: [{ text: string }];
+}
+
 class TextStorageService {
   private storedText: string;
+  private history: Message[];
 
   constructor() {
-    // Área reservada para o texto padrão (pode ser substituído via API)
-    this.storedText = `
-[ÁREA RESERVADA PARA O TEXTO PADRÃO]
-Insira aqui as Normas Operacionais de um Elevador Manual de Carga dos Anos 1970.
-    `.trim();
+    this.storedText = '';
+    this.history = [];
   }
 
   public storeText(text: string): void {
     this.storedText = text;
+    this.history = []; // Reseta o histórico ao receber um novo texto base
   }
 
   public getText(): string {
     return this.storedText;
+  }
+
+  public getHistory(): Message[] {
+    return this.history;
+  }
+
+  public addMessageToHistory(role: 'user' | 'model', text: string): void {
+    this.history.push({
+      role,
+      parts: [{ text }],
+    });
   }
 }
 
